@@ -12,6 +12,8 @@ except IOError:
 # line, it's possible required libraries won't be in your searchable path
 #
 
+from beholdr.wsgi import application
+
 def application(environ, start_response):
 
     ctype = 'text/plain'
