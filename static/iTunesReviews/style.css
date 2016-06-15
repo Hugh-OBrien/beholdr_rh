@@ -1,0 +1,49 @@
+#wrap {
+    width: 80%;
+    height: 200px;
+
+
+    padding: 5px;
+}
+
+div #left {
+    width: 70%;
+    float: left;
+}
+div #right {
+    margin-left: 30%;
+}
+
+#NavButton{
+  font-size: 150%;
+  font-weight:bold;
+}
+
+#search{
+  font-size: 150%;
+  font-weight:bold;
+  size:200%;
+}
+#searchBox{
+
+}
+
+#searchButton{
+
+}
+
+.top-buffer { margin-top:20px; }
+
+
+* {
+  font-family: sans-serif;
+}
+body { padding-top: 70px; }
+
+:checked + span {
+  background-color:99CCCC;
+}
+.hiddenCheckBox{
+  width: 1px;
+  visibility: hidden;
+}

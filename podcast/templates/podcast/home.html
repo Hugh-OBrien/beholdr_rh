@@ -1,0 +1,37 @@
+{% extends "base.html"%}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% load wagtailimages_tags %}
+
+
+{% block extra_js %}
+<script>
+ jQuery(document).ready(function($) {
+     $(".clickable-row").click(function() {
+	 window.document.location = $(this).data("href");
+     });
+ });
+</script>
+{% endblock %}
+
+  {% block content %}
+  {% image root.main_image width-5000 as jumbo %}
+
+  <div class="jumbotron podcast-header" style="background-image: url('{{ jumbo.url }}')">
+      <h1>{{root.title}} </h1>
+      <p></p>
+      <p>{{root.description|safe|escape}}</p>
+      <p></p>
+    </div>
+    <ul class="show-list">
+      {% for e in eps %}
+      <a href="{% pageurl e %}">
+	<li class="panel cast-box">
+	  {% image e.main_image width-400 as img %}
+	  <div class="panel episode-img" style="background-image: url('{{ e.image_URL }}')">
+	  </div>
+	<h1><b>{{ e }} </b></h1>
+      </li>
+      </a>
+    {% endfor %}
+    </ul>
+  {%endblock%}

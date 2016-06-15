@@ -1,0 +1,55 @@
+
+{% extends "base.html"%}
+
+{% load staticfiles %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"> </script>
+{% load bootstrap3 %}
+{% bootstrap_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'iTunesReviews/style.css' %}">
+{% bootstrap_javascript %}
+
+
+<body>
+
+{%block content%}
+
+  <div class="container-fluid">
+    <div class="jumbotron">
+      <h1>Beholdr </h1>
+      <p></p>
+      <p>Beholder is a reporting tool for content creators, collecting metrics and data from distribution platforms</p>
+      <p>Please send suggestions for tools <a href="mailto:hugh@beholdr.eu">hugh@beholdr.eu</a></p>
+    </div>
+      <div class="row top-buffer">
+        <div class="col-md-6">
+          <a class="btn btn-default btn-lg btn-block" type="button" style="white-space:normal;" href="../iTunesReviews/">
+            <h1 style="vertical-align:top;"><b>iTunes Review Report</b></h1>
+          </a>
+        </div>
+
+        <div class="col-md-6">
+          <p><b>iTunes reviews for every country </b></p>
+          <p style="text-align:justify;">iTunes separates reviews by country, meaning on a given page of iTunes you can only see one country's reviews.
+            This complies a report of all reviews available for a given iTunes Id in a chosen set of countries or regions.</p>
+
+        </div>
+
+      </div>
+
+      <div class="row top-buffer">
+        <div class="col-md-6">
+          <a class="btn btn-default btn-lg btn-block" type="button" style="white-space:normal width:600px;" href="../iTunesReviews/searchid">
+            <h1 style="vertical-align:top;"><b>iTunes id Finder</b></h1>
+
+          </a>
+        </div>
+        <div class="col-md-6">
+          <p><b>iTunes unique id search</b></p>
+          <p style="text-align:justify;">Search by name for the unique iTunes ID for anything listed on the iTunes store</p>
+        </div>
+      </div>
+
+  </div>
+{%endblock%}
+
+</body>

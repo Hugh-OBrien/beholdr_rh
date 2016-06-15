@@ -1,0 +1,155 @@
+{% extends "base.html"%}
+
+{% load staticfiles %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+{% load bootstrap3 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block extra_js %}
+
+<script language = "JavaScript">
+  window.onload = function v(){
+    document.getElementById("reviews").className = "active";
+  }
+
+
+ function checkAll(ele) {
+     var checkboxes = document.getElementsByTagName('input');
+     var others = document.getElementsByName('checkAllRegion')
+     if (ele.value=="Check All") {
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = true;
+             }
+         }
+     for(var p = 0; p< others.length; p++){
+       others[p].value = "Uncheck All";
+       others[p].style.backgroundColor="99CCCC";
+     }
+     ele.value = "Uncheck All";
+     ele.style.backgroundColor="99CCCC";
+     } else {
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = false;
+             }
+         }
+     checkboxes[3].value = "Check All";
+     ele.style.backgroundColor="white";
+     for(var p = 0; p< others.length; p++){
+       others[p].value = "Check All";
+       others[p].style.backgroundColor="white";
+     }
+     }
+   }
+
+   function checkBlock(ele) {
+     var name = ele.name;
+     var div = document.getElementById(ele.id);
+     var checkboxes = div.getElementsByTagName('input')
+     if (ele.value=="Check All") {
+       for (var i = 0; i < checkboxes.length; i++) {
+         if (checkboxes[i].type == 'checkbox') {
+           checkboxes[i].checked = true;
+         }
+       }
+       ele.value = "Uncheck All";
+       ele.style.backgroundColor="99CCCC";
+       }
+       else {
+         for (var i = 0; i < checkboxes.length; i++) {
+             if (checkboxes[i].type == 'checkbox') {
+                 checkboxes[i].checked = false;
+             }
+         }
+
+       ele.value = "Check All";
+       ele.style.backgroundColor = "white";
+       }
+     }
+
+ function validateForm() {
+   var x = document.forms["idForm"]["id"].value;
+   var y = document.forms["idForm"]["countryList[]"];
+   console.log(y[0].checked);
+   if(x == null || x == ""){
+     document.getElementById("errors").innerHTML = '<div style="color:red; font-size:70%;">Missing iTunes ID</div>'
+     return false;
+   }
+   if(x<100000000 || x > 9999999999 ||isNaN(x)){
+     document.getElementById("errors").innerHTML = '<div style="color:red; font-size:70%;">iTunes ID out of range - 9 or 10 digit number </div>'
+     return false;
+   }
+   var countryFound = false;
+   for(var k = 0; k < y.length; k++){
+      if(y[k].checked == true){
+        countryFound = true;
+        break;
+      }
+   }
+   if(countryFound == false){
+     document.getElementById("errors").innerHTML = '<div style="color:red; font-size:70%;">No Countries Selected</div>'
+     return false;
+   }
+   document.getElementById("errors").innerHTML = ''
+ }
+
+</script>
+{% endblock %}
+
+<body>
+
+{%block content%}
+  <div class="clean_background">
+    <form class="form-inline" name = "idForm" action="{% url 'iTunesReviews:progressPage' %}" onsubmit="return validateForm()" method="post">
+      {% csrf_token %}
+      <div class="form-group" id="search">
+        <label for="your_name">Enter iTunes ID </label>
+        <input id="searchBox" class="form-control" min="100000000" max="9999999999" name="id" value="{{Ident}}">
+        <input id="searchButton" class="btn btn-default" type="submit" value="Collect Reviews and Download">
+        <p id="errors"></p>
+      </div>
+
+      {% if country_list %}
+      <p><input class="btn btn-default" type="button" onclick= "checkAll(this)" name = "checkUncheck" value = "Check All"> </p>
+        <div class="panel-group" id="accordion">
+        {% for key, values in country_list.items %}
+          <div class ="row">
+            <div class="col-md-8">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{forloop.counter}}">
+                    <h4 class="panel-title", style="color:black;">
+                      {{key}}
+                    </h4>
+                  </a>
+                </div>
+                <div id="collapse{{forloop.counter}}" class="panel-collapse collapse">
+                  <div class="panel-body" id="{{key}}">
+                    {% for con in values %}
+                      <label >
+                        <input class="hiddenCheckBox" id="{{con}}" type = "checkbox" name= "countryList[]" value="{{con}}" >
+                        <span  class="btn btn-default ">{{con|slice:"3:"}}</span>
+                      </label>
+                      <br>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <p><input class="btn btn-default" id="{{key}}" name="checkAllRegion" type="button" onclick= "checkBlock(this)" value = "Check All"> </p>
+            </div>
+            </div>
+
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>country list missing!</p>
+      {% endif %}
+
+    </form>
+  </div>
+  {% endblock %}
+</body>

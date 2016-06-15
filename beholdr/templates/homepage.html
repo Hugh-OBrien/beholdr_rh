@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+<div id="carousel" class="carousel slide" data-ride="carousel">
+  <div class="jumbotron">
+    <ol class="carousel-indicators">
+      {% for p in carousel %}
+      <li data-target="#carousel" data-slide-to="{{forloop.counter0}}"
+	  {% if p == carousel.0 %}
+	  class="active"
+	  {% endif %}
+      ></li>
+      {% endfor %}
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      {% for p in carousel %}
+      <div class="item
+		  {% if p == carousel.0 %}
+		  active
+		  {% endif %}
+		  ">
+	<a class="carousel-text" href="{% pageurl p %}">
+	  <h1>"{{p.quote}}"</h1>
+	  <h2>{{p}}</h2>
+	</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<div class="container">
+  <ul class="show-list">
+    {% for show in shows %}
+    <li class="cast-box panel">
+      <img src ='{{ show.1.image_URL }}' width="100"></img>
+      <b><h2>{{show.0.title}}</h2></b>
+      <h4>{{show.0.description|safe}}</h4>
+      <a class="btn btn-primary cast-link" role="button" href="{% pageurl show.0 %}">View Episodes</a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+
+{%block extra_js%}
+
+<script language = "JavaScript">
+  window.onload = function(){
+    var x = document.getElementById("simplecast");
+    x.className = "active";
+
+  }
+</script>
+<script type="text/javascript">
+  $(function() {
+    $( "#date" ).datepicker({dateFormat:'yy/mm/dd'});
+  });
+  </script>
+{%endblock%}
+
+<body>
+{{date}}
+{% block content %}
+ <div class="clean_background">
+    <div>
+      <form class="form-inline" name = "search" action="{% url 'simple_cast:listenByEpisode' %}" method="post">
+        {% csrf_token %}
+        <div class ="row" id="search">
+		<div class="col-md-2"><label for="your_name">Give your podcast's Simplecast ID and the date for which you want a breakdown </label></div>
+
+		<div class="col-md-2">ID<input id="pod" class="form-control" type="text" name="pod" value={{pod}}></div>
+
+		<div class="col-md-2">Date <input id="date" class="form-control" type="text" name="date" value={{date}}></div>
+
+        <div class="col-md-8"><input id="searchButton" class="btn btn-default" type="submit" value="Go"></div>
+        </div>
+      </form>
+    </div>
+    <div>
+
+      {% if results %}
+          <table class = "table table-hover">
+            {% for r in results %}
+		<tr>
+	        {% for k in r %}
+			<td> {{k}} </td>
+		{% endfor %}
+		</tr>
+            {% endfor %}
+          </table>
+      {% endif %}
+    </div>
+  </div>
+{%endblock%}
+</body>
