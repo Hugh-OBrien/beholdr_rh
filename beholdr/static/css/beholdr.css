@@ -25,10 +25,7 @@ body {
 
 .clean_background {
     background-color: #FFFFFF;
-    padding-top: 10px;
-    padding-left: 20%;
-    margin-left: 0;
-    margin: 0;
+    padding: 10px;
 }
 
 .error {
