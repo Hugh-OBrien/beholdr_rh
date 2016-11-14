@@ -1,10 +1,12 @@
 from __future__ import absolute_import, unicode_literals
-from os import environ as env_var
+
+import os
+
 from .base import *
 
 DEBUG = False
 
-SECRET_KEY = env_var.get('beholdr_rh')
+SECRET_KEY=os.environ['beholdr_rh']
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
