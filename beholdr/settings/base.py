@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     'simple_cast',
     'iTunesReviews',
     'podcast',
-    'home',
     'search',
     'bootstrap3',
     'wagtail.wagtailforms',

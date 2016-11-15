@@ -18,7 +18,7 @@ def home(request, cast = ""):
         return redirect('../')
 
     #Search for everything published with the cast name
-    eps = Episode.objects.search(cast, fields=["podcast"])
+    eps = Episode.objects.filter(podcast=cast).order_by('published_date').reverse()
 
     #paginate and render
     paginator = Paginator(eps, 9)
@@ -40,7 +40,6 @@ def home(request, cast = ""):
         'eps':eps,
         'root':root,
     })
-
 
 def vhs(request):
     """

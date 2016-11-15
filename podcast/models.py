@@ -88,7 +88,7 @@ class Episode(Page):
         FieldPanel('description'),
         FieldPanel('quote'),
         ImageChooserPanel('main_image'),
-        FieldPanel("published_date"),
+        FieldPanel('published_date'),
         InlinePanel('related_links', label="Related links")
     ]
 

@@ -58,12 +58,13 @@ def daySummary(pod, dateStart, dateEnd):
         eyeD = str(e['id'])
         title = e['title']
         data = json.loads(requests.get(baseUrl+eyeD+timeframe,auth=(APIKEY,'')).text)
-        listens = data['total_listens']
-        if(listens != 0):
-            res.append([title,listens])
-            count += 1
-            total += listens
-
+        if 'total_listens' in data.keys():
+            listens = data['total_listens']
+            if(listens != 0):
+                res.append([title,listens])
+                count += 1
+                total += listens
+            
     res.append(['Total', total])
     res.append(['Number of Episodes with listens', count])
     return res
