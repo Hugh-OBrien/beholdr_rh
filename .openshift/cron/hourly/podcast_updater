@@ -1,5 +1,4 @@
 #!/bin/bash
 cd $OPENSHIFT_REPO_DIR
-p
-ython manage.py update_episodes 1105
+python manage.py update_episodes 1105
 python manage.py update_episodes 2120
