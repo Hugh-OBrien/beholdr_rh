@@ -1,5 +1,0 @@
-#!/bin/bash
-cd $OPENSHIFT_REPO_DIR
-
-python manage.py 1105
-python manage.py 2120
