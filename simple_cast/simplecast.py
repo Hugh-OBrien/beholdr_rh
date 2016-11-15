@@ -1,11 +1,9 @@
 import xml.etree.ElementTree as ET
 import requests
 import json
-from os import path, chdir
-#from openpyxl import Workbook
-#from openpyxl.writer.excel import save_virtual_workbook
+from os import path, chdir, environ
 
-APIKEY = "sc_JDJfR4EUt0UOFPwbkU6tMw"
+APIKEY = environ["SIMPLECAST"]
 CASTID = "1105"
 
 def get():
@@ -62,18 +60,12 @@ def daySummary(pod, dateStart, dateEnd):
         data = json.loads(requests.get(baseUrl+eyeD+timeframe,auth=(APIKEY,'')).text)
         listens = data['total_listens']
         if(listens != 0):
-            #print title + ": " + str(listens)
             res.append([title,listens])
             count += 1
             total += listens
 
     res.append(['Total', total])
     res.append(['Number of Episodes with listens', count])
-    #print "Total Listens: " + str(total) + " from " + str(count) + " episodes"
     return res
-
-
-#daySummary("2016-05-22","2016-06-11")
-
 
 
