@@ -1,7 +1,5 @@
 from __future__ import absolute_import, unicode_literals
-
 from django.db import models
-
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import RichTextField
@@ -114,6 +112,20 @@ class CastRoot(Page):
         ImageChooserPanel('main_image')
     ]
 
+# hosts to be displayed on the contact page
+class Host(Page):
+    twitter_handle = models.CharField(max_length=20, default="")
+    blurb = RichTextField(blank=True)
 
-    
+    content_panels = Page.content_panels + [
+        FieldPanel('twitter_handle'),
+        FieldPanel('blurb'),
+    ]
 
+# the root page used for folders 
+class HomePage(Page):
+    body = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('body', classname="full"),
+    ]

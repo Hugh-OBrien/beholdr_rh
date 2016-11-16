@@ -2,9 +2,9 @@ from django.core.management.base import BaseCommand
 from wagtail.wagtailcore.models import Page
 from podcast.models import Episode, CastRoot
 from django.core.exceptions import ObjectDoesNotExist
-import requests, json
+import requests, json, os
 
-APIKEY = "sc_JDJfR4EUt0UOFPwbkU6tMw"
+APIKEY = os.environ['SIMPLECAST']
 CASTID = "1105"
 
 class Command(BaseCommand):

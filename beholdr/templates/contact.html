@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+<div class = "container" >
+
+  <iframe frameborder='0' height='330px' scrolling='no' seamless src='https://simplecast.com/e/{{page.epID}}?style=large' width='100%'></iframe>
+
+  {{page.description|richtext}}
+  {{page.others}}
+</div>
+{% endblock %}

@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.db.models import Max
 from podcast.models import Episode, CastRoot
+from wagtail.wagtailsearch.backends import get_search_backend
 
 def homepage(request):
 
@@ -29,4 +30,3 @@ def homepage(request):
     context = RequestContext(request, {'carousel': recent_casts,
                                        'shows': shows_data})
     return HttpResponse(template.render(context))
-
