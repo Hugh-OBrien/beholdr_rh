@@ -250,6 +250,10 @@ body {
     border-color: #ff5f5d;
     color: #000000;
 }
+.episode-box {
+    width: 100%;
+    background-color: #fff;
+}
 
 /* END CASTS */
 /* BEGIN CONTACT*/
