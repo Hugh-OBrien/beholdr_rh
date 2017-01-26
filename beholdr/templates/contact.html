@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
 {% load wagtailcore_tags %}
 
@@ -6,11 +7,24 @@
 
 {% block content %}
 
-<div class = "container" >
-
-  <iframe frameborder='0' height='330px' scrolling='no' seamless src='https://simplecast.com/e/{{page.epID}}?style=large' width='100%'></iframe>
-
-  {{page.description|richtext}}
-  {{page.others}}
+<div class = "container host-page" >
+    <div class="row title-panel">
+        <p> {{network.body|richtext}} </p>
+    </div>
+    {% for host in hosts %}
+    <div class="row host-panel">
+        <div class="host-inner">
+            <div class="col-md-3">
+                <img class="img-host" src={{host.twitter_handle}}>
+            </div>
+            <div class="col-md-9">
+                <div class="host-details">
+                    <span class="host-name">{{host.title}}</span>
+                    <p> {{host.blurb|richtext}} </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </div>
 {% endblock %}

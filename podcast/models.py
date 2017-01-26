@@ -47,7 +47,7 @@ class LinkFields(models.Model):
     class Meta:
         abstract = True
 
-                       
+
 class RelatedLink(LinkFields):
     title = models.CharField(max_length=255, help_text="Link title")
 

@@ -226,4 +226,16 @@ body {
     color: #000000;
 }
 
+.img-host {
+    width: 10px;
+    height: 10px;
+    color: #333;
+    border-radius: 50%;
+}
+.host-name{
+    font-weight: bold;
+}
+.host-details{
+    margin-top: 10px;
+}
 /* END CASTS */

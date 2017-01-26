@@ -23,6 +23,7 @@ body {
     padding-bottom: 200px;
 }
 
+
 .clean_background {
     background-color: #FFFFFF;
     padding: 10px;
@@ -251,3 +252,34 @@ body {
 }
 
 /* END CASTS */
+/* BEGIN CONTACT*/
+.title-panel{
+    padding: 30px;
+    padding-left: 110px;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+.img-host {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.host-name{
+    font-weight: bold;
+}
+.host-details{
+    margin-top: 10px;
+}
+.host-panel{
+    padding: 10px;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+.host-inner{
+    margin-right: 100px;
+    margin-left: 100px;
+}
+.host-page{
+    width: 100%;
+}
+/* END CONTACT */
