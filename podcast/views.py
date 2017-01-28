@@ -8,7 +8,7 @@ from models import Episode, CastRoot
 
 from django.db import models
 from wagtail.wagtailcore.models import Page, Orderable
-
+from dateutil import parser
 
 def home(request, cast = ""):
     page = request.GET.get('page', 1)
@@ -20,14 +20,13 @@ def home(request, cast = ""):
     #Search for everything published with the cast name
     eps = Episode.objects.filter(podcast=cast).order_by('published_date').reverse()
 
+    for e in eps:
+        e.published_date = parser.parse(e.published_date).date
     #paginate and render
     paginator = Paginator(eps, 9)
 
     #get CastRoot object
     root = CastRoot.objects.get(pod_id=int(cast))
-    
-    for a in CastRoot.objects.all():
-        print (a.pod_id)
 
     try:
         eps = paginator.page(page)
@@ -35,7 +34,7 @@ def home(request, cast = ""):
         eps = paginator.page(1)
     except EmptyPage:
         eps = paginator.page(paginator.num_pages)
-        
+
     return render(request, 'podcast/home.html', {
         'eps':eps,
         'root':root,

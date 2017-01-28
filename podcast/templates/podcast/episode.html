@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load wagtailcore_tags %}
+{% load markup_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
@@ -9,8 +10,9 @@
 <div class = "container" >
 
 	<iframe frameborder='0' height='330px' scrolling='no' seamless src='https://simplecast.com/e/{{page.epID}}?style=large' width='100%'></iframe>
-
-	{{page.description|richtext}}
-	{{page.others}}
+	<div class="panel episode-description">
+	    {{page.description|apply_markup:"markdown"}}
+	    {{page.others}}
+	</div>
 </div>
 {% endblock %}
