@@ -20,8 +20,6 @@ urlpatterns = [
     url(r'^vhs/$',  podcast_views.vhs, name='vhs'),
     url(r'^pie/$',  podcast_views.pie, name='pie'),
     url(r'^search/$', search_views.search, name='search'),
-    url(r'^tools/simplecast/', include('simple_cast.urls',\
-                                       namespace="simple_cast")),
     url(r'^tools/iTunesReviews/', include('iTunesReviews.urls', \
                                     namespace ="iTunesReviews")),
     url(r'', include(wagtail_urls)),

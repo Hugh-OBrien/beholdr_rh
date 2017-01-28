@@ -46,10 +46,10 @@
     </ul>
     <ul class="pagination">
 	{% if eps.has_previous %}
-	<li><a href="?page={{eps.previous_page_number}}"}}>back</a></li>
+	<li><a href="?page={{eps.previous_page_number}}"}}>newer</a></li>
 	{% endif %}
 	{% if eps.has_next %}
-	<li><a href="?page={{eps.next_page_number}}"}}>more...</a></li>
+	<li><a href="?page={{eps.next_page_number}}"}}>older...</a></li>
 	{% endif %}
     </ul>
 </div>
