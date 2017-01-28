@@ -13,4 +13,9 @@ openpyxl==2.3.0
 whitenoise
 django-bootstrap3
 requests[security]
-tweepy
+django-markup
+textile
+smartypants
+docutils
+markdown
+python-creole

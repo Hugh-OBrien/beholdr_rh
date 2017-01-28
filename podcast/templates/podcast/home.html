@@ -15,6 +15,7 @@
 
 {% block content %}
 {% image root.main_image width-5000 as jumbo %}
+{% load markup_tags %}
 
 <div class="jumbotron podcast-header" style="background-image: url('{{ jumbo.url }}')">
     <h1>{{root.title}} </h1>
@@ -25,19 +26,31 @@
 <div class ="container">
     <ul class="show-list">
 	{% for e in eps %}
-	<a href="{% pageurl e %}">
-	    <li class="episode-box">
-		<div class="row panel">
-		    <div class="col-md-6">
-			<h2>{{ e }}</h2>
-		    </div>
-		    <div class="col-md-6">
-			<iframe frameborder='0' scrolling='no' seamless src='https://simplecast.com/e/{{e.epID}}?style=medium-dark' width='100%'></iframe>
-		    </div>
+	<li class="episode-box">
+	    <div class="row panel">
+		<div class="col-md-12">
+		    <a class="episode-link" href="{% pageurl e %}">
+			<h2 >{{ e }}</h2>
+		    </a>
 		</div>
-	    </li>
-	</a>
+		<div class="col-md-6">
+		    <p> {{ e.published_date }} </p>
+		    <p> {{ e.summary|apply_markup:"markdown" }} </p>
+		</div>
+		<div class="col-md-6">
+		    <iframe frameborder='0' scrolling='no' seamless src='https://simplecast.com/e/{{e.epID}}?style=medium-light' class="small-player" ></iframe>
+		</div>
+	    </div>
+	</li>
 	{% endfor %}
+    </ul>
+    <ul class="pagination">
+	{% if eps.has_previous %}
+	<li><a href="?page={{eps.previous_page_number}}"}}>back</a></li>
+	{% endif %}
+	{% if eps.has_next %}
+	<li><a href="?page={{eps.next_page_number}}"}}>more...</a></li>
+	{% endif %}
     </ul>
 </div>
 {%endblock%}

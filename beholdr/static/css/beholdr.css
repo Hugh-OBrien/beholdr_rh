@@ -253,6 +253,18 @@ body {
 .episode-box {
     width: 100%;
     background-color: #fff;
+    text-align: left;
+}
+.small-player{
+    margin-top: 20px;
+    width: 100%;
+}
+.episode-link, .episode-link:hover{
+    color: black;
+    text-decoration: none;
+	       }
+.pagination {
+    float: right;
 }
 
 /* END CASTS */

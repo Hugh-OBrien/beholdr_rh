@@ -35,10 +35,11 @@ def home(request, cast = ""):
         eps = paginator.page(1)
     except EmptyPage:
         eps = paginator.page(paginator.num_pages)
-    
+        
     return render(request, 'podcast/home.html', {
         'eps':eps,
         'root':root,
+        'pagination_loop' :range( int(page),  ),
     })
 
 def vhs(request):

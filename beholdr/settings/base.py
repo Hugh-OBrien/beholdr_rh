@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'podcast',
     'search',
     'bootstrap3',
+    'django_markup',
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
     'wagtail.wagtailembeds',
