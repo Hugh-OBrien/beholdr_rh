@@ -151,9 +151,8 @@ body {
     width:20px;
 }
 
-.search-icon{
+.search-icon>svg{
     width:20px;
-    padding-top:15px;
 }
 .search-icon> svg path{
    fill: #FFFFFF;
@@ -268,6 +267,16 @@ body {
 }
 .episode-description {
     padding: 10px;
+}
+
+.search-box{
+    margin: 20px -30px 10px -30px;
+}
+.search-box > form {
+    padding: 10px;
+}
+.search-box > * {
+    padding-left: 10px;
 }
 /* END CASTS */
 /* BEGIN CONTACT*/

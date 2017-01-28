@@ -1,0 +1,45 @@
+{% extends "base.html"%}
+{% load static wagtailcore_tags wagtailimages_tags %}
+{% load wagtailimages_tags %}
+
+{% block content %}
+{% image root.main_image width-5000 as jumbo %}
+{% load markup_tags %}
+
+<div class ="container">
+    <div class="row panel search-box">
+	<h2>Search</h2>
+	<p> Enter a term below to search episodes from all our shows</p>
+	<form class="form-inline" name = "idForm" action="{% url 'search' %}" onsubmit="return validateForm()" method="post">
+	    {% csrf_token %}
+	    <div class="form-group" id="search">
+		<input id="searchBox" class="form-control" name="search_term">
+		<input id="searchButton" class="btn btn-default" type="submit" value="Search">
+		<p id="errors"></p>
+	    </div>
+	</form>
+    </div>
+    <div class="row">
+	<ul class="show-list">
+	    {% for e in eps %}
+	    <li class="episode-box">
+		<div class="row panel">
+		    <div class="col-md-12">
+			<a class="episode-link" href="{% pageurl e %}">
+			    <h2 >{{ e }}</h2>
+			</a>
+		    </div>
+		    <div class="col-md-6">
+			<p> {{ e.published_date }} </p>
+			<p> {{ e.summary|apply_markup:"markdown" }} </p>
+		    </div>
+		    <div class="col-md-6">
+			<iframe frameborder='0' scrolling='no' seamless src='https://simplecast.com/e/{{e.epID}}?style=medium-light' class="small-player" ></iframe>
+		    </div>
+		</div>
+	    </li>
+	    {% endfor %}
+	</ul>
+    </div>
+</div>
+{%endblock%}

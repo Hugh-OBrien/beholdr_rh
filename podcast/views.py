@@ -41,6 +41,32 @@ def home(request, cast = ""):
         'pagination_loop' :range( int(page),  ),
     })
 
+def search(request):
+    page = request.GET.get('page', 1)
+    try:
+        search_term = request.POST['search_term']
+    except:
+        search_term = ""
+
+    if search_term == "":
+        eps = []
+    else:
+        eps = Episode.objects.all().search(search_term)
+    print search_term
+    print eps  
+    paginator = Paginator(eps, 9)    
+    try:
+        eps = paginator.page(page)
+    except PageNotAnInteger:
+        eps = paginator.page(1)
+    except EmptyPage:
+        eps = paginator.page(paginator.num_pages)
+
+    return render(request, 'podcast/search.html', {
+        'eps':eps,
+        'search':search_term
+    })
+
 def vhs(request):
     """
     Add a custom view function for each podcast and generate the homepage
