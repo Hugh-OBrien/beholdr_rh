@@ -34,7 +34,7 @@
   <ul class="show-list">
     {% for show in shows %}
     <li class="cast-box panel">
-      <img src ='{{ show.1.image_URL }}' width="100"></img>
+      <img src ='{{ show.1.image_URL }}' width="100" height="100"></img>
       <b><h2>{{show.0.title}}</h2></b>
       <h4>{{show.0.description|safe}}</h4>
       <a class="btn btn-primary cast-link" role="button" href="{% pageurl show.0 %}">View Episodes</a>

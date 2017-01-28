@@ -52,8 +52,9 @@ def search(request):
         eps = []
     else:
         eps = Episode.objects.all().search(search_term)
-    print search_term
-    print eps  
+
+    for e in eps:
+        e.published_date = parser.parse(e.published_date).date
     paginator = Paginator(eps, 9)    
     try:
         eps = paginator.page(page)
