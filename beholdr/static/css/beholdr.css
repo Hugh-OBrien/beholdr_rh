@@ -1,11 +1,11 @@
-/* 
-Main colours - 
+/*
+Main colours -
 Red 4 - #ff5f5d
 Red 3 - #ff6d6d
 Red 2 - #ff7b72
 Red 1 - #ff867e
 
-Fonts 
+Fonts
 
 - Welshein
 - Esti Pro
@@ -51,6 +51,20 @@ body {
 .footer-cast-link {
     color:#000000;
     line-height: 2;
+}
+
+#cursor-pick {
+    border-color: darkgrey;
+    border-radius: 50%;
+    border-style: solid;
+    width: 80px;
+    height: 80px;
+    float: right;
+    margin-top: 20px;
+}
+#cursor-img {
+    width: 40px;
+    margin: 20px;
 }
 
 .podcast-header {
@@ -134,7 +148,6 @@ body {
 }
 
 .dropdown-toggle{
-    
     background-color:#ff5f5d;
     border-color: #ff867e;
 }
