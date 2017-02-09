@@ -10,14 +10,12 @@
     {% load staticfiles %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"> </script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-   
     {% load bootstrap3 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     {% block extra_js %}
     {# Override this in templates to add extra javascript #}
     {% endblock %}
-
 
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -32,13 +30,11 @@
     {# Override this in templates to add extra stylesheets #}
     {% endblock %}
     {% load main_tags %}
-
   </head>
 
   <body class="{% block body_class %}{% endblock %}">
     {% wagtailuserbar %}
 
-    
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
 	<div class="navbar-header">
@@ -89,14 +85,68 @@
 
     <footer class="footer">
       <div class="container">
-	<h3>Shows</h3>
-	<ul class="footer-cast-list">
-	  {% all_podcasts as podcasts%}
-	  {% for a in podcasts %}
-	  <li><a class="footer-cast-link" href="/{{a.slug}}">{{a.title}}</a></li>
-          {% endfor %}
-	</ul>
+        <div class="col-md-8">
+	  <h3>Shows</h3>
+	  <ul class="footer-cast-list">
+	    {% all_podcasts as podcasts%}
+	    {% for a in podcasts %}
+	    <li><a class="footer-cast-link" href="/{{a.slug}}">{{a.title}}</a></li>
+            {% endfor %}
+	  </ul>
+        </div>
+        <div class="col-md-4">
+          <div id="cursor-pick">
+            cursor change
+            <img id="cursor-img" src=""></img>
+          </div>
+        </div>
       </div>
+      <script>
+       function getCookie(cname) {
+         var name = cname + "=";
+         var ca = document.cookie.split(';');
+         for(var i = 0; i < ca.length; i++) {
+           var c = ca[i];
+           while (c.charAt(0) == ' ') {
+             c = c.substring(1);
+           }
+           if (c.indexOf(name) == 0) {
+             return c.substring(name.length, c.length);
+           }
+         }
+         return 0;
+       }
+       function setCookie(cname, cvalue, exdays) {
+         var d = new Date();
+         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+         var expires = "expires="+d.toUTCString();
+         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+       }
+       // cursor-picker
+       const cursors = ["default", "cur111.cur", "nat816.cur"]
+       // initialise the cursor index
+       var curIndex = getCookie('cursorIndex');
+
+       function updateCursor(){
+         if(curIndex === 0){
+           $(document.body).css("cursor", "default");
+           $('#cursor-img').attr("src","/static/css/default.cur")
+         }else{
+           var setTo = "url('/static/css/" + cursors[curIndex] + "'), default"
+           $(document.body).css("cursor", setTo);
+           $('#cursor-img').attr("src","/static/css/" + cursors[curIndex])
+         }
+       }
+       updateCursor()
+       $("#cursor-pick").click(function(){
+         curIndex++;
+         if(curIndex === cursors.length){
+           curIndex = 0;
+         }
+         updateCursor()
+         setCookie("cursorIndex", curIndex, 5)
+       });
+      </script>
     </footer>
     {# Global javascript #}
     <script type="text/javascript" src="{% static 'js/beholdr.js' %}"></script>
