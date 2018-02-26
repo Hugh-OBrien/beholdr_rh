@@ -106,20 +106,11 @@ if 'OPENSHIFT_POSTGRESQL_DB_URL' in os.environ:
         }
 #otherwise try local db options. Postgres tried first to check for a backed up version of the production db
 else:
-    try:
-        DATABASES['default'] = {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': "beholdr",
-            'USER': "postgres",
-            'PASSWORD': 'postgres',
-            'HOST': 'localhost',
-        }
-    except:
-        print "POSTGRES DB NOT WORKING, SETTING TO LOCAL SQLITE"
-        DATABASES['default'] = {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'dev.db'),
-        }
+    print "POSTGRES DB NOT WORKING, SETTING TO LOCAL SQLITE"
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'dev.db'),
+    }
 
 
 # Internationalization
